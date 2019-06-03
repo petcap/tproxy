@@ -54,10 +54,13 @@ class Client {
   //Return an array of socket that are ready to be read from
   public function readable_sockets() {
     if ($this -> inner_closed || $this -> outer_closed) return array();
-    return array(
-      $this -> inner_socket,
-      $this -> outer_socket
-    );
+    $ret = array();
+
+    //Make sure we don't overflow our buffers
+    if (strlen($this -> outgoing_buffer) < INTERNAL_BUFFER) $ret[] = $this -> inner_socket;
+    if (strlen($this -> incoming_buffer) < INTERNAL_BUFFER) $ret[] = $this -> outer_socket;
+
+    return $ret;
   }
 
   //Return an array of socket that are ready to be written to

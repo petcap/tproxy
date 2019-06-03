@@ -1,7 +1,7 @@
 
 <?php
 //Maximum internal buffer space, stop reading data if reached
-define("INTERNAL_BUFFER", 1024);
+define("INTERNAL_BUFFER", 4096);
 
 //Number of bytes per socket read
 define("READ_SIZE", 1024);
