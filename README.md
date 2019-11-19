@@ -8,3 +8,4 @@ Some random code that demonstrates how to properly use Netfilters tproxy target 
 
 ## Limitations
 - Currently only supports TCP. Unfortunately, UDP support cannot be added in PHP because we cannot obtain the C struct containing both the source/destination IPs and ports. This is a limitation of PHP and not Netfilter, an implementation written in C (or perhaps other languages) would be able to also implement UDP support.
+- Socket lookup after each `socket_select()` is currently O(N^2), so don't expect great performance for thousands of simultaneous connections.
